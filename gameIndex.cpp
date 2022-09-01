@@ -25,7 +25,7 @@ int main(){
         getline(GameIn,engineSize,',');
         getline(GameIn,horsePower,',');
         getline(GameIn,price,',');
-        getline(GameIn,group,',');
+        getline(GameIn,group,'\n');
 
         total.Append(model,stoi(curbWeight),stoi(engineSize),stoi(horsePower),stoi(price),group);
     }
