@@ -1,25 +1,17 @@
-#include <iostream>
-using namespace std;
+#ifndef GAMEMECHANICS_H
+#define GAMEMECHANICS_H
 
+#include "CardsQueue.h"
+#include "Player.h"
+#include "Cards.h"
 
-class Game{
+class Game {
+    Player player1, player2;
     public:
-        Game();
-        void Append(string m, int c, int e, int h, int p, string g);
-        void Serve(int &x);
-        bool Full();
-        bool Empty();
-    private:
-        struct Cards{
-            string model;
-            int curbWeight;
-            int engineSize;
-            int horsePower;
-            int price;
-            string group;
-            Cards *Next;
-        };
+        Game(Player player1, Player player2);
+        void Round();
+        bool HasGame();
 
-        Cards *head;
-        Cards *tail;
 };
+
+#endif

@@ -34,3 +34,13 @@ apenas para as cartas que tenham a letra A no grupo (2A, 3A, 4A, etc).
 Quando a carta **SUPER TRUNFO** aparecer, a comparação será automática.
 Portanto, não há necessidade de escolher um atributo para comparar.
 Vence o jogo quem possuir todas as cartas no seu deck.  
+
+
+### Rules games
+- [] - Em cada rodada serão exibidos a carta do topo do Deck
+- [] - Os players devem selecionar um atributo de comparação da carta para ser comparado com o do outro
+- [] - Ganha a rodada quem tiver a maior pontuação do atributo escolhido
+- [] - O Ganhador da rodada ganha a carta do oponente e esta vai para o final do seu deck
+- [] - Cartas especiais (super-trunfu):
+        - [] - Quando a carta for do grupo 1A o player ganha a rodada automáticamente, esta perde apenas quando o grupo da outra carta for 2A, 3A e 4A, consecutivamente. A comparação é automática
+- [] - O Jogo acaba quando um dos players não tiver mais carta, quem tiver todas as cartas será o vencedor
