@@ -2,6 +2,11 @@
 #include "listCards.h"
 using namespace std;
 
+/*
+    precisa de ajustes para se adequar ao jogo
+*/
+
+
 bool ListCards::Full(){
     return false;
 }
@@ -11,7 +16,7 @@ bool ListCards::Empty(){
 }
 
 void ListCards::Insert(int x){
-    Node NewNode, current;
+    NodePointer NewNode, current;
     NewNode = new Node;
     NewNode->Entry = x;
 
@@ -28,23 +33,23 @@ void ListCards::Insert(int x){
     count++;
 }
 
-void List::SetPosition(int p, ListPointer &current){ 
+void ListCards::SetPosition(int p, ListPointer &current){ 
     int i;
     current = head;
     for(i=2; i<=p; i++)
     current = current->NextNode;
 } 
 
-void ListCards::Delete(int &x){
-    Node Node, current;
-    if(p == 1)
-    { Node = head;
-    head = Node->next;
+void ListCards::Delete(int p, int &x){
+    NodePointer Node, current;
+    if(p == 1){ 
+        Node = head;
+        head = NodePointer->next;
     }
-    else
-    { SetPosition(p-1,current);
-    Node = current->next;
-    current->next = Node->next;
+    else{ 
+        SetPosition(p-1,current);
+        Node = current->next;
+        current->next = Node->next;
     }
     x = Node->Entry;
     delete Node;

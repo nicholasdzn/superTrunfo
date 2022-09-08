@@ -13,9 +13,9 @@ void Game::Round() {
     
     if (!HasGame()) {
         if (player1.HasCards()) {
-            cout << "Player 1: " << player1.Nome << "Wins !!!!";
+            cout << "Player 1: " << player1.nome << "Wins !!!!";
         }else {
-            cout << "Player 2: " << player2.Nome << "Wins !!!!";
+            cout << "Player 2: " << player2.nome << "Wins !!!!";
         }
         cout << "End game" << endl;
         abort();
@@ -34,31 +34,31 @@ void Game::Round() {
     Cards card_of_player1 = player1.RemoveTopCards();
 
     if (cards_player1.isSuperTrunfo) {
-        cout << "Player " << player1.Nome << " wins the round" << endl;
+        cout << "Player " << player1.nome << " wins the round" << endl;
         player1.Append(card_of_player2);
         player1.Append(card_of_player1);
     }else if (cards_player2.isSuperTrunfo) {
-        cout << "Player " << player2.Nome << " wins the round" << endl;
+        cout << "Player " << player2.nome << " wins the round" << endl;
         player2.Append(card_of_player2);
         player2.Append(card_of_player1);
     }else if (cards_player1.isSuperTrunfo && card_of_player2.isSuperTrunfo) {
         if (cards_player1.group[1] > card_of_player2.group[2]) {
-            cout << "Player " << player1.Nome << " wins the round" << endl;
+            cout << "Player " << player1.nome << " wins the round" << endl;
             player1.Append(card_of_player2);
             player1.Append(card_of_player1);
         }else {
-            cout << "Player " << player2.Nome << " wins the round" << endl;
+            cout << "Player " << player2.nome << " wins the round" << endl;
             player2.Append(card_of_player2);
             player2.Append(card_of_player1);
         }
     }
 
     if (value_attr1 > value_attr2) {
-        cout << "Player " << player1.Nome << " wins the round" << endl;
+        cout << "Player " << player1.nome << " wins the round" << endl;
         player1.Append(card_of_player2);
         player1.Append(card_of_player1);
     }else if (value_attr2 > value_attr1) {
-        cout << "Player " << player2.Nome << " wins the round" << endl;
+        cout << "Player " << player2.nome << " wins the round" << endl;
         player2.Append(card_of_player2);
         player2.Append(card_of_player1);
     }else {

@@ -6,18 +6,20 @@
 #include "structCards.h"
 
 class Player {
-    string nome;
     CardsQueue cards;
 
     public:
-        Player();
+        string nome;
+        Player(string _Nome);
         ~Player();
         void InsertEndCards(Cards cards);
+        void Append(Cards card);
         Cards RemoveTopCards();
         Cards GetTopCards();
         bool HasCards();
+
         int SelectAttribute();
         double GetValueAttributeOfCards(Cards card, int attribute); 
-}
+};
 
 #endif

@@ -9,8 +9,9 @@
 
 struct CardsElement {
     Cards card;
+    Cards value;
     CardsElement *next;
-}
+};
 
 typedef struct CardsElement CardsElement;
 

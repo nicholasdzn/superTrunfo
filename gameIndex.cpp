@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(){
-    Game total;
+    // Game total;
     string namefile = "cards.csv";
     ifstream GameIn(namefile, ios::in);
 
@@ -27,6 +27,6 @@ int main(){
         getline(GameIn,price,',');
         getline(GameIn,group,'\n');
 
-        total.Append(model,stoi(curbWeight),stoi(engineSize),stoi(horsePower),stoi(price),group);
+        // total.Append(model,stoi(curbWeight),stoi(engineSize),stoi(horsePower),stoi(price),group);
     }
 }

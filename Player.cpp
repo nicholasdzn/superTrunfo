@@ -2,12 +2,12 @@
 #include <iostream>
 
 Player::Player(string _Nome) {
-    Nome = _Nome;
+    nome = _Nome;
 }
 Player::~Player() {
     cards.Clear();
 }
-void Player::InsertEndCard(Cards cards) {
+void Player::InsertEndCards(Cards cards) {
     cards.Append(cards);
 }
 Cards Player::RemoveTopCards() {
@@ -21,7 +21,7 @@ bool Player::HasCards() {
 }
 int Player::SelectAttribute() {
     int option;
-    std::cout << Nome << " selected the attribute: "
+    std::cout << nome << " selected the attribute: ";
     std::cin >> option;
     return option;
 }

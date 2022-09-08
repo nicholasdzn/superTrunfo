@@ -3,7 +3,7 @@
 
 #include "CardsQueue.h"
 #include "Player.h"
-#include "Cards.h"
+#include "CardsQueue.h"
 
 class Game {
     Player player1, player2;
