@@ -3,21 +3,23 @@
 #include "CardsQueue.h"
 using namespace std;
 
-class ListCards(){
+class ListCards{
     public:
         ListCards();
         ~ListCards();
-        void Insert(int x);
+        void Insert(int p,int x);
         void Delete(int p, int &x);
         bool Empty();
         bool Full();
     private:
-        void SetPosition(int p, CardsElement &current);
         int count = 0;
         int p = 1;
         struct Node{
-            Cards Entry;
+            int Entry;
             Node *next;
-        }
-        typedef Node *pointer;
-}
+        };
+        typedef Node *ListPointer;
+        ListPointer head;
+        int count;
+        void SetPosition(int p, ListPointer &current);
+};
