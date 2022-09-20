@@ -9,9 +9,14 @@ class Game {
     Player player1, player2;
     public:
         Game(Player player1, Player player2);
-        void Round();
+        bool Turn();
         bool HasGame();
-
+        void InitTurn();
+        Player WhoWinsTurn();
+        Player NormalRule();
+        Player SuperTrunfuRule();
+        void SetDeckOfPlayers();
+        void SetChoiceAttributes();
 };
 
 #endif

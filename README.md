@@ -38,7 +38,7 @@ Vence o jogo quem possuir todas as cartas no seu deck.
 
 ### Rules games
 - [] - Em cada rodada serão exibidos a carta do topo do Deck
-- [] - Os players devem selecionar um atributo de comparação da carta para ser comparado com o do outro
+- [] - Os players devem selecionar um atributo de comparação da carta do topo para ser comparado com o do outro
 - [] - Ganha a rodada quem tiver a maior pontuação do atributo escolhido
 - [] - O Ganhador da rodada ganha a carta do oponente e esta vai para o final do seu deck
 - [] - Cartas especiais (super-trunfu):

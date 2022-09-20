@@ -3,21 +3,22 @@
 
 #include <string>
 #include "CardsQueue.h"
-#include "structCards.h"
+#include "Cards.h"
+#include "AttributeCards.h"
 
 class Player {
-    string nome;
+    std::string nome;
     CardsQueue cards;
 
     public:
-        Player();
+        Player(std::string nome);
         ~Player();
-        void InsertEndCards(Cards cards);
+        void InsertCardsOnDeck(Cards cards);
         Cards RemoveTopCards();
-        Cards GetTopCards();
+        Cards CurrentCard();
         bool HasCards();
-        int SelectAttribute();
-        double GetValueAttributeOfCards(Cards card, int attribute); 
-}
+        double GetValueAttributeOfCurrentCards(AttributeCards attribute);
+        std::string GetNome();
+};
 
 #endif
