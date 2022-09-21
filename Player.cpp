@@ -5,7 +5,6 @@ Player::Player(std::string _nome) {
     nome = _nome;
 }
 Player::~Player() {
-    // cards.Clear();
 }
 void Player::InsertCardsOnDeck(Cards _cards) {
     cards.Append(_cards);
@@ -40,4 +39,7 @@ int Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
 }
 std::string Player::GetNome () {
     return nome;
+}
+void Player::Clear() {
+    cards.Clear();
 }

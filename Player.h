@@ -20,6 +20,7 @@ class Player {
         bool HasCards();
         int GetValueAttributeOfCurrentCards(AttributeCards attribute);
         std::string GetNome();
+        void Clear();
 };
 
 #endif
