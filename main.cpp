@@ -19,6 +19,26 @@ ListCards list;
 Game game(p1,p2);
 //variaveis globais
 
+AttributeCards GetAttribute(int attribute) {
+    switch (attribute) {
+        case 1:
+            return AttributeCards::CURB_WEIGHT;
+        break;
+        case 2:
+            return AttributeCards::ENGINE_SIZE;
+        break;
+        case 3:
+            return AttributeCards::HORSE_POWER;
+        break;
+        case 4:
+            return AttributeCards::PRICE;
+        break;
+        default:
+            cout << "opcao invalida" << endl;
+            abort();
+    }
+}
+
 void StartGame(){
     Cards card;
     int decideQualPlayer = 0;
@@ -80,27 +100,6 @@ Cards FactoryCard (
     cards.SetSuperTrunfu(group);
     return cards;
 }
-
-AttributeCards GetAttribute(int attribute) {
-    switch (attribute) {
-        case 1:
-            return AttributeCards::CURB_WEIGHT;
-        break;
-        case 2:
-            return AttributeCards::ENGINE_SIZE;
-        break;
-        case 3:
-            return AttributeCards::HORSE_POWER;
-        break;
-        case 4:
-            return AttributeCards::PRICE;
-        break;
-        default:
-            cout << "opcao invalida" << endl;
-            abort();
-    }
-}
-
 
 int main (void) {
     srand(time(NULL));
