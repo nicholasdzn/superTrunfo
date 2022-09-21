@@ -33,29 +33,18 @@ Cards FactoryCard (
     return cards;
 }
 
-
-void PrintInfoCardOfPlayer (Cards card) {
-    cout << "===========================" << endl;
-    cout << "model: " << card.model << endl;
-    cout << "weight: " << card.curbWeight << endl;
-    cout << "engine size: " << card.engineSize << endl;
-    cout << "horse power: " << card.horsePower << endl;
-    cout << "price: " << card.price << endl;
-    cout << "group: " << card.group << endl;
-}
-
 AttributeCards GetAttribute(int attribute) {
     switch (attribute) {
-        case 0:
+        case 1:
             return AttributeCards::CURB_WEIGHT;
         break;
-        case 1:
+        case 2:
             return AttributeCards::ENGINE_SIZE;
         break;
-        case 2:
+        case 3:
             return AttributeCards::HORSE_POWER;
         break;
-        case 3:
+        case 4:
             return AttributeCards::PRICE;
         break;
         default:
@@ -96,7 +85,6 @@ int main (void) {
         positionList++;
     }
 
-    Game game(p1,p2);
     Cards card;
     int decideQualPlayer = 0;
 
@@ -109,17 +97,32 @@ int main (void) {
         }
         decideQualPlayer++;
     }
-    AttributeCards attributePlayer, attributeComputer;
+
+    AttributeCards attribute;
     int attributeTemp;
     Player playerWins;
+
+    Game game(p1,p2);
+    bool vezPlayer = true;
+
     while(game.HasGame()) {
-        PrintInfoCardOfPlayer(p1.CurrentCard());
-        PrintInfoCardOfPlayer(p2.CurrentCard());
-        cout << "Escolha o atributo: " << endl;
-        cin >> attributeTemp;
-        attributePlayer = GetAttribute(attributeTemp);
-        attributeComputer = GetAttribute((rand() % 4) + 1);
-        game.SetChoiceAttributes(attributePlayer, attributeComputer);
+        game.PrintInfoCards();
+        if (game.HasSuperTrunfuInTurn()) {
+            game.Turn();
+            playerWins = game.GetPlayerWinsTurn();
+            cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+            continue;
+        }
+        if (vezPlayer) {
+            cout << "Escolha o atributo: " << endl;
+            cin >> attributeTemp;
+            vezPlayer = false;
+        }else {
+            attributeTemp = (rand() % 4) + 1;
+            vezPlayer = true;
+        }
+        attribute = GetAttribute(attributeTemp);
+        game.SetChoiceAttributes(attribute);
         game.Turn();
         playerWins = game.GetPlayerWinsTurn();
         cout <<  "Ganhou: " << playerWins.GetNome() << endl;

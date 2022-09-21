@@ -27,15 +27,15 @@ void Game::InitTurn () {
 }
 
 Player Game::WhoWinsTurn () {
-    if (currentCardPlayer1.IsSuperTrunfu() || currentCardPlayer2.IsSuperTrunfu())
+    if (HasSuperTrunfuInTurn())
         return SuperTrunfuRule();
 
     return NormalRule();
 }
 
 Player Game::NormalRule () {
-    double attr1 = player1.GetValueAttributeOfCurrentCards(attrChoicePlayer1);
-    double attr2 = player2.GetValueAttributeOfCurrentCards(attrChoicePlayer2);
+    double attr1 = player1.GetValueAttributeOfCurrentCards(attrChoicePlayer);
+    double attr2 = player2.GetValueAttributeOfCurrentCards(attrChoicePlayer);
 
     if (attr1 > attr2) {
         return player1;
@@ -67,12 +67,29 @@ void Game::SetDeckOfPlayers (Player player) {
     player.InsertCardsOnDeck(player2.RemoveTopCards());
 }
 
-void Game::SetChoiceAttributes (AttributeCards attr1, AttributeCards attr2) {
-    attrChoicePlayer1 = attr1;
-    attrChoicePlayer2 = attr2;
+void Game::SetChoiceAttributes (AttributeCards currentAttribute) {
+    attrChoicePlayer = currentAttribute;
 }
 
 Player Game::GetPlayerWinsTurn() {
     return playerWins;
 }
 
+bool Game::HasSuperTrunfuInTurn () {
+    return currentCardPlayer1.IsSuperTrunfu() || currentCardPlayer2.IsSuperTrunfu();
+}
+
+void Game::PrintInfoCards () {
+    PrintInfoCardOfPlayer(player1.CurrentCard());
+    PrintInfoCardOfPlayer(player2.CurrentCard());
+}
+
+void Game::PrintInfoCardOfPlayer (Cards card) {
+    std::cout << "===========================" << std::endl;
+    std::cout << "model: " << card.model << std::endl;
+    std::cout << "weight: " << card.curbWeight << std::endl;
+    std::cout << "engine size: " << card.engineSize << std::endl;
+    std::cout << "horse power: " << card.horsePower << std::endl;
+    std::cout << "price: " << card.price << std::endl;
+    std::cout << "group: " << card.group << std::endl;
+}
