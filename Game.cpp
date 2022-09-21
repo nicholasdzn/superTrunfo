@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Game::Game(Player p1, Player p2){
+Game::Game(Player *p1, Player *p2){
     player1 = p1;
     player2 = p2;
 }
@@ -11,31 +11,27 @@ bool Game::Turn() {
     if (!HasGame()) {
         return false;
     }
-    InitTurn();
-    playerWins = WhoWinsTurn();
-    SetDeckOfPlayers(playerWins);
+    if (HasSuperTrunfuInTurn())
+        playerWins = SuperTrunfuRule();
+    else
+        playerWins = NormalRule();
+
+    SetDeckOfPlayers();
     return true;
 }
 
 bool Game::HasGame () {
-    return player1.HasCards() && player2.HasCards();
+    return player1->HasCards() && player2->HasCards();
 }
 
 void Game::InitTurn () {
-    currentCardPlayer1 = player1.CurrentCard();
-    currentCardPlayer2 = player2.CurrentCard();
+    currentCardPlayer1 = player1->CurrentCard();
+    currentCardPlayer2 = player2->CurrentCard();
 }
 
-Player Game::WhoWinsTurn () {
-    if (HasSuperTrunfuInTurn())
-        return SuperTrunfuRule();
-
-    return NormalRule();
-}
-
-Player Game::NormalRule () {
-    double attr1 = player1.GetValueAttributeOfCurrentCards(attrChoicePlayer);
-    double attr2 = player2.GetValueAttributeOfCurrentCards(attrChoicePlayer);
+Player* Game::NormalRule () {
+    double attr1 = player1->GetValueAttributeOfCurrentCards(attrChoicePlayer);
+    double attr2 = player2->GetValueAttributeOfCurrentCards(attrChoicePlayer);
 
     if (attr1 > attr2) {
         return player1;
@@ -44,7 +40,7 @@ Player Game::NormalRule () {
     }
 }
 
-Player Game::SuperTrunfuRule () {
+Player* Game::SuperTrunfuRule () {
     bool bothAreSuperTrunfu = currentCardPlayer1.IsSuperTrunfu() && currentCardPlayer2.IsSuperTrunfu();
 
     if (bothAreSuperTrunfu) {
@@ -62,9 +58,9 @@ Player Game::SuperTrunfuRule () {
     }
 }
 
-void Game::SetDeckOfPlayers (Player player) {
-    player.InsertCardsOnDeck(player1.RemoveTopCards());
-    player.InsertCardsOnDeck(player2.RemoveTopCards());
+void Game::SetDeckOfPlayers () {
+    playerWins->InsertCardsOnDeck(player1->RemoveTopCards());
+    playerWins->InsertCardsOnDeck(player2->RemoveTopCards());
 }
 
 void Game::SetChoiceAttributes (AttributeCards currentAttribute) {
@@ -72,7 +68,7 @@ void Game::SetChoiceAttributes (AttributeCards currentAttribute) {
 }
 
 Player Game::GetPlayerWinsTurn() {
-    return playerWins;
+    return *playerWins;
 }
 
 bool Game::HasSuperTrunfuInTurn () {
@@ -80,8 +76,8 @@ bool Game::HasSuperTrunfuInTurn () {
 }
 
 void Game::PrintInfoCards () {
-    PrintInfoCardOfPlayer(player1.CurrentCard());
-    PrintInfoCardOfPlayer(player2.CurrentCard());
+    PrintInfoCardOfPlayer(player1->CurrentCard());
+    PrintInfoCardOfPlayer(player2->CurrentCard());
 }
 
 void Game::PrintInfoCardOfPlayer (Cards card) {

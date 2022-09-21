@@ -7,7 +7,7 @@ CardsQueue::CardsQueue() {
     full = false;
 }
 CardsQueue::~CardsQueue() {
-    Clear();
+    // Clear();
 }
 void CardsQueue::Append(Cards card) {
     CardsElement *temp = tail;

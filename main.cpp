@@ -13,11 +13,24 @@
 
 using namespace std;
 
-Player p1("player");
-Player p2("computer");
-ListCards list;
-Game game(p1,p2);
-//variaveis globais
+Cards FactoryCard (
+    string model,
+    int curbWeight,
+    int engineSize,
+    int horsePower,
+    int price,
+    string group
+) {
+    Cards cards;
+    cards.model = model;
+    cards.curbWeight = curbWeight;
+    cards.engineSize = engineSize;
+    cards.horsePower = horsePower;
+    cards.price = price;
+    cards.group = group;
+    cards.SetSuperTrunfu(group);
+    return cards;
+}
 
 AttributeCards GetAttribute(int attribute) {
     switch (attribute) {
@@ -39,7 +52,8 @@ AttributeCards GetAttribute(int attribute) {
     }
 }
 
-void StartGame(){
+void StartGame(ListCards &list){
+    Player p1("player"), p2("Computer");
     Cards card;
     int decideQualPlayer = 0;
 
@@ -55,15 +69,23 @@ void StartGame(){
 
     int attributeTemp;
     Player playerWins;
-    AttributeCards attribute;
     bool vezPlayer = true;
+    Game game(&p1,&p2);
 
     while(game.HasGame()) {
+        game.InitTurn();
         game.PrintInfoCards();
+        if (vezPlayer) {
+            cout << "Turno jogador!" << endl;
+        }else {
+            cout << "Turno computador!" << endl;
+        }
+
         if (game.HasSuperTrunfuInTurn()) {
             game.Turn();
             playerWins = game.GetPlayerWinsTurn();
             cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+            vezPlayer = !vezPlayer;
             continue;
         }
         if (vezPlayer) {
@@ -74,31 +96,11 @@ void StartGame(){
             attributeTemp = (rand() % 4) + 1;
             vezPlayer = true;
         }
-        attribute = GetAttribute(attributeTemp);
-        game.SetChoiceAttributes(attribute);
+        game.SetChoiceAttributes(GetAttribute(attributeTemp));
         game.Turn();
         playerWins = game.GetPlayerWinsTurn();
         cout <<  "Ganhou: " << playerWins.GetNome() << endl;
     }
-}
-
-Cards FactoryCard (
-    string model,
-    int curbWeight,
-    int engineSize,
-    int horsePower,
-    int price,
-    string group
-) {
-    Cards cards;
-    cards.model = model;
-    cards.curbWeight = curbWeight;
-    cards.engineSize = engineSize;
-    cards.horsePower = horsePower;
-    cards.price = price;
-    cards.group = group;
-    cards.SetSuperTrunfu(group);
-    return cards;
 }
 
 int main (void) {
@@ -116,7 +118,8 @@ int main (void) {
 
     int positionList = 1;
 
-     while(!GameIn.eof()){
+    ListCards list;
+    while(!GameIn.eof()){
         getline(GameIn,model,',');
         getline(GameIn,curbWeight,',');
         getline(GameIn,engineSize,',');
@@ -130,59 +133,11 @@ int main (void) {
         positionList++;
     }
 
-    int escolha;
+    
     cout << "BEM VINDO AO SUPERTRUNFO !!" << endl;
     cout << "===========================" << endl;
-    cout << "1 - COMECAR O JOGO " << endl;
-    cout << "2 - SOBRE O JOGO " << endl;
-    cout << "escolha uma opção: ";
-
-    cin >> escolha;
-
-    if(escolha == 1){
-        game.GameRules();  
-    }else if(escolha == 2){
-        StartGame();
-    }
-
-
-    // cout << "PLAYER 1: " << endl;
-    // while (p1.HasCards()) {
-    //     card = p1.RemoveTopCards();
-    //     cout << "===========================" << endl;
-    //     cout << "model: " << card.model << endl;
-    //     cout << "weight: " << card.curbWeight << endl;
-    //     cout << "engine size: " << card.engineSize << endl;
-    //     cout << "horse power: " << card.horsePower << endl;
-    //     cout << "price: " << card.price << endl;
-    //     cout << "group: " << card.group << endl;
-    // }
-
-    // cout << "PLAYER 2: " << endl;
-    // while (p2.HasCards()) {
-    //     card = p2.RemoveTopCards();
-    //     cout << "===========================" << endl;
-    //     cout << "model: " << card.model << endl;
-    //     cout << "weight: " << card.curbWeight << endl;
-    //     cout << "engine size: " << card.engineSize << endl;
-    //     cout << "horse power: " << card.horsePower << endl;
-    //     cout << "price: " << card.price << endl;
-    //     cout << "group: " << card.group << endl;
-    // }
-
-
-    // ListPointer tempList;
-    // for (int i = 1; i <= list.Count(); i++) {
-    //     list.GetPosition(i, tempList);
-    //     card = tempList->cards;
-    //     cout << "===========================" << endl;
-    //     cout << "model: " << card.model << endl;
-    //     cout << "weight: " << card.curbWeight << endl;
-    //     cout << "engine size: " << card.engineSize << endl;
-    //     cout << "horse power: " << card.horsePower << endl;
-    //     cout << "price: " << card.price << endl;
-    //     cout << "group: " << card.group << endl;
-    // }
-
+    Game::GameRules();
+    StartGame(list);
+    
     return 0;
 }

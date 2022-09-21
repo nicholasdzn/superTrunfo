@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #include <string>
-#include "CardsQueue.h"
 #include "Cards.h"
+#include "CardsQueue.h"
 #include "AttributeCards.h"
 
 class Player {
@@ -18,7 +18,7 @@ class Player {
         Cards RemoveTopCards();
         Cards CurrentCard();
         bool HasCards();
-        double GetValueAttributeOfCurrentCards(AttributeCards attribute);
+        int GetValueAttributeOfCurrentCards(AttributeCards attribute);
         std::string GetNome();
 };
 

@@ -5,7 +5,7 @@ Player::Player(std::string _nome) {
     nome = _nome;
 }
 Player::~Player() {
-    cards.Clear();
+    // cards.Clear();
 }
 void Player::InsertCardsOnDeck(Cards _cards) {
     cards.Append(_cards);
@@ -19,9 +19,9 @@ Cards Player::CurrentCard() {
 bool Player::HasCards() {
     return cards.Size() > 0;
 }
-double Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
+int Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
     Cards card = CurrentCard();
-    double value;
+    int value;
     switch (attribute) {
         case AttributeCards::CURB_WEIGHT:
             value = card.curbWeight;
