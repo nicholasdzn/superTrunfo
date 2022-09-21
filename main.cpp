@@ -13,6 +13,54 @@
 
 using namespace std;
 
+Player p1("player");
+Player p2("computer");
+ListCards list;
+Game game(p1,p2);
+//variaveis globais
+
+void StartGame(){
+    Cards card;
+    int decideQualPlayer = 0;
+
+    while (!list.Empty()) {
+        list.Delete((rand() % list.Count()) + 1, card);
+        if (decideQualPlayer % 2 == 0) {
+            p1.InsertCardsOnDeck(card);
+        }else {
+            p2.InsertCardsOnDeck(card);
+        }
+        decideQualPlayer++;
+    }
+
+    int attributeTemp;
+    Player playerWins;
+    AttributeCards attribute;
+    bool vezPlayer = true;
+
+    while(game.HasGame()) {
+        game.PrintInfoCards();
+        if (game.HasSuperTrunfuInTurn()) {
+            game.Turn();
+            playerWins = game.GetPlayerWinsTurn();
+            cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+            continue;
+        }
+        if (vezPlayer) {
+            cout << "Escolha o atributo: " << endl;
+            cin >> attributeTemp;
+            vezPlayer = false;
+        }else {
+            attributeTemp = (rand() % 4) + 1;
+            vezPlayer = true;
+        }
+        attribute = GetAttribute(attributeTemp);
+        game.SetChoiceAttributes(attribute);
+        game.Turn();
+        playerWins = game.GetPlayerWinsTurn();
+        cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+    }
+}
 
 Cards FactoryCard (
     string model,
@@ -53,11 +101,9 @@ AttributeCards GetAttribute(int attribute) {
     }
 }
 
+
 int main (void) {
     srand(time(NULL));
-    Player p1("player");
-    Player p2("computer");
-    ListCards list;
 
     string namefile = "cards.csv";
     ifstream GameIn(namefile, ios::in);
@@ -85,48 +131,22 @@ int main (void) {
         positionList++;
     }
 
-    Cards card;
-    int decideQualPlayer = 0;
+    int escolha;
+    cout << "BEM VINDO AO SUPERTRUNFO !!" << endl;
+    cout << "===========================" << endl;
+    cout << "1 - COMECAR O JOGO " << endl;
+    cout << "2 - SOBRE O JOGO " << endl;
+    cout << "escolha uma opção: ";
 
-    while (!list.Empty()) {
-        list.Delete((rand() % list.Count()) + 1, card);
-        if (decideQualPlayer % 2 == 0) {
-            p1.InsertCardsOnDeck(card);
-        }else {
-            p2.InsertCardsOnDeck(card);
-        }
-        decideQualPlayer++;
+    cin >> escolha;
+
+    if(escolha == 1){
+        game.GameRules();  
+    }else if(escolha == 2){
+        StartGame();
     }
 
-    AttributeCards attribute;
-    int attributeTemp;
-    Player playerWins;
 
-    Game game(p1,p2);
-    bool vezPlayer = true;
-
-    while(game.HasGame()) {
-        game.PrintInfoCards();
-        if (game.HasSuperTrunfuInTurn()) {
-            game.Turn();
-            playerWins = game.GetPlayerWinsTurn();
-            cout <<  "Ganhou: " << playerWins.GetNome() << endl;
-            continue;
-        }
-        if (vezPlayer) {
-            cout << "Escolha o atributo: " << endl;
-            cin >> attributeTemp;
-            vezPlayer = false;
-        }else {
-            attributeTemp = (rand() % 4) + 1;
-            vezPlayer = true;
-        }
-        attribute = GetAttribute(attributeTemp);
-        game.SetChoiceAttributes(attribute);
-        game.Turn();
-        playerWins = game.GetPlayerWinsTurn();
-        cout <<  "Ganhou: " << playerWins.GetNome() << endl;
-    }
     // cout << "PLAYER 1: " << endl;
     // while (p1.HasCards()) {
     //     card = p1.RemoveTopCards();

@@ -25,6 +25,7 @@ class Game {
         Player GetPlayerWinsTurn();
         void PrintInfoCards();
         bool HasSuperTrunfuInTurn();
+        void GameRules();
 };
 
 #endif
