@@ -98,7 +98,7 @@ void Game::GameRules(){
     std::cout << "O jogo é todo baseado em comparar as cartas que você possui com as do seu adversário (no caso o computador)." << std::endl; 
     std::cout << "Para que sua carta vença, o atributo (ou característica) escolhido precisa ter valor maior do que a carta do seu adversário." << std::endl;
     std::cout << "Quando sua carta vence, você ganha a carta do seu adversário. Em seguida,coloca ambas no fim do seu deck" << std::endl;
-    std::cout << std::"============================================================================================================================";
+    std::cout << "============================================================================================================================" << std::endl;
     std::cout << "1. Embaralham-se as 32 cartas e dividem-se em dois decks (um para cada jogador –P1 e P2)" << std::endl;
     std::cout << "2. É retirada a carta do topo do deck de P1 e P2." << std::endl;
     std::cout << "3. Escolhe-se o atributo que vai ser comparado e verifica-se quem venceu." << std::endl;
