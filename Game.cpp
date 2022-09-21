@@ -1,6 +1,4 @@
 #include "Game.h"
-#include <iostream>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -14,8 +12,8 @@ bool Game::Turn() {
         return false;
     }
     InitTurn();
-    playerWin = WhoWinsTurn();
-    SetDeckOfPlayers();
+    playerWins = WhoWinsTurn();
+    SetDeckOfPlayers(playerWins);
     return true;
 }
 
@@ -65,12 +63,16 @@ Player Game::SuperTrunfuRule () {
 }
 
 void Game::SetDeckOfPlayers (Player player) {
-    player.Append(player1.RemoveTopCards());
-    player.Append(player2.RemoveTopCards());
+    player.InsertCardsOnDeck(player1.RemoveTopCards());
+    player.InsertCardsOnDeck(player2.RemoveTopCards());
 }
 
 void Game::SetChoiceAttributes (AttributeCards attr1, AttributeCards attr2) {
     attrChoicePlayer1 = attr1;
     attrChoicePlayer2 = attr2;
+}
+
+Player Game::GetPlayerWinsTurn() {
+    return playerWins;
 }
 

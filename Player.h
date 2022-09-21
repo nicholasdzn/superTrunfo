@@ -11,6 +11,7 @@ class Player {
     CardsQueue cards;
 
     public:
+        Player();
         Player(std::string nome);
         ~Player();
         void InsertCardsOnDeck(Cards cards);

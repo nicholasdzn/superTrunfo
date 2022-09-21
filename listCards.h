@@ -1,25 +1,22 @@
-#include <iostream>
 #include "Cards.h"
-#include "CardsQueue.h"
-using namespace std;
+
+struct Node{
+    Cards cards;
+    Node *next;
+};
+typedef Node *ListPointer;
 
 class ListCards{
     public:
         ListCards();
         ~ListCards();
-        void Insert(int p,int x);
-        void Delete(int p, int &x);
+        void Insert(int p, Cards x);
+        void Delete(int p, Cards &x);
         bool Empty();
         bool Full();
+        void GetPosition(int p, ListPointer &current);
+        int Count();
     private:
         int count = 0;
-        int p = 1;
-        struct Node{
-            int Entry;
-            Node *next;
-        };
-        typedef Node *ListPointer;
         ListPointer head;
-        int count;
-        void SetPosition(int p, ListPointer &current);
 };

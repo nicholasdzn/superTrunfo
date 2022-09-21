@@ -1,5 +1,6 @@
 #include "Player.h"
 
+Player::Player(){}
 Player::Player(std::string _nome) {
     nome = _nome;
 }
@@ -16,7 +17,7 @@ Cards Player::CurrentCard() {
     return cards.Front();
 }
 bool Player::HasCards() {
-    return cards.Size() == 0;
+    return cards.Size() > 0;
 }
 double Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
     Cards card = CurrentCard();
@@ -32,7 +33,7 @@ double Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
             value = card.horsePower;
         break;
         case AttributeCards::PRICE:
-            value = retunr card.price;
+            value = card.price;
         break;
     }
     return value;
