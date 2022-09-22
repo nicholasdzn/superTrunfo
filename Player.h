@@ -2,22 +2,25 @@
 #define PLAYER_H
 
 #include <string>
+#include "Cards.h"
 #include "CardsQueue.h"
-#include "structCards.h"
+#include "AttributeCards.h"
 
 class Player {
-    string nome;
+    std::string nome;
     CardsQueue cards;
 
     public:
         Player();
+        Player(std::string nome);
         ~Player();
-        void InsertEndCards(Cards cards);
+        void InsertCardsOnDeck(Cards cards);
         Cards RemoveTopCards();
-        Cards GetTopCards();
+        Cards CurrentCard();
         bool HasCards();
-        int SelectAttribute();
-        double GetValueAttributeOfCards(Cards card, int attribute); 
-}
+        int GetValueAttributeOfCurrentCards(AttributeCards attribute);
+        std::string GetNome();
+        void Clear();
+};
 
 #endif

@@ -1,43 +1,45 @@
 #include "Player.h"
-#include <iostream>
 
-Player::Player(string _Nome) {
-    Nome = _Nome;
+Player::Player(){}
+Player::Player(std::string _nome) {
+    nome = _nome;
 }
 Player::~Player() {
-    cards.Clear();
 }
-void Player::InsertEndCard(Cards cards) {
-    cards.Append(cards);
+void Player::InsertCardsOnDeck(Cards _cards) {
+    cards.Append(_cards);
 }
 Cards Player::RemoveTopCards() {
     return cards.Serve();
 }
-Cards Player::GetTopCards() {
+Cards Player::CurrentCard() {
     return cards.Front();
 }
 bool Player::HasCards() {
-    return cards.Count() == 0;
+    return cards.Size() > 0;
 }
-int Player::SelectAttribute() {
-    int option;
-    std::cout << Nome << " selected the attribute: "
-    std::cin >> option;
-    return option;
-}
-double Player::GetValueAttributeOfCards(Cards card, int attribute) {
+int Player::GetValueAttributeOfCurrentCards(AttributeCards attribute) {
+    Cards card = CurrentCard();
+    int value;
     switch (attribute) {
         case AttributeCards::CURB_WEIGHT:
-            return card.curbWeight;
+            value = card.curbWeight;
         break;
         case AttributeCards::ENGINE_SIZE:
-            return card.engineSize;
+            value = card.engineSize;
         break;
         case AttributeCards::HORSE_POWER:
-            return card.horsePower;
+            value = card.horsePower;
         break;
         case AttributeCards::PRICE:
-            return card.price;
+            value = card.price;
         break;
     }
+    return value;
+}
+std::string Player::GetNome () {
+    return nome;
+}
+void Player::Clear() {
+    cards.Clear();
 }

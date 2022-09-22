@@ -1,16 +1,15 @@
 #ifndef CARDSQUEUE_H
 #define CARDSQUEUE_H
 
-#include <stddef.h>
-#include <stdbool.h>
 #include <string>
-#include "structCards.h"
 #include <iostream>
+#include <stddef.h>
+#include "Cards.h"
 
 struct CardsElement {
     Cards card;
     CardsElement *next;
-}
+};
 
 typedef struct CardsElement CardsElement;
 

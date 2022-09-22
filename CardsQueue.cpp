@@ -1,4 +1,4 @@
-#include "queue.h"
+#include "CardsQueue.h"
 
 CardsQueue::CardsQueue() {
     head = NULL;
@@ -7,9 +7,8 @@ CardsQueue::CardsQueue() {
     full = false;
 }
 CardsQueue::~CardsQueue() {
-    Clear();
 }
-void CardsQueue::Append(int value) {
+void CardsQueue::Append(Cards card) {
     CardsElement *temp = tail;
     tail = new CardsElement;
     if (tail == NULL) {
@@ -17,7 +16,7 @@ void CardsQueue::Append(int value) {
         return;
     }
     
-    tail->value = value;
+    tail->card = card;
     if (temp != NULL) {
         temp->next = tail;
     }
@@ -33,7 +32,7 @@ Cards CardsQueue::Serve () {
         abort();
     }
     CardsElement *temp = head->next;
-    int tempValue = head->value;
+    Cards tempValue = head->card;
     delete head;
     head = temp;
     size--;
@@ -53,8 +52,8 @@ int CardsQueue::Size () {
     return size;
 }
 Cards CardsQueue::Front() {
-    return head->value;
+    return head->card;
 }
 Cards CardsQueue::Rear() {
-    return tail->value;
+    return tail->card;
 }
