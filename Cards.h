@@ -20,7 +20,7 @@ typedef struct {
             return groupSuperTrunfu;
         }
         void SetSuperTrunfu (std::string group) {
-            if (group[1] == 'A') {
+            if (group[1] == 'A' && group[0] == '1') {
                 isSuperTrunfo = true;
                 groupSuperTrunfu = std::stoi(&group[0]);
             } else {

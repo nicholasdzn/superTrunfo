@@ -5,6 +5,7 @@
 #include <cctype>
 #include <stdlib.h>
 #include <time.h>
+#include <locale.h>
 #include "Cards.h"
 #include "Player.h"
 #include "ListCards.h"
@@ -73,23 +74,25 @@ void StartGame(ListCards &list){
     Game game(&p1,&p2);
 
     while(game.HasGame()) {
-        game.InitTurn();
-        game.PrintInfoCards();
         if (vezPlayer) {
             cout << "Turno jogador!" << endl;
         }else {
             cout << "Turno computador!" << endl;
         }
 
+        game.InitTurn();
+        game.PrintInfoCards(&p1);
+
         if (game.HasSuperTrunfuInTurn()) {
             game.Turn();
             playerWins = game.GetPlayerWinsTurn();
             cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+            cout << "============================" << endl;
             vezPlayer = !vezPlayer;
             continue;
         }
         if (vezPlayer) {
-            cout << "Escolha o atributo: " << endl;
+            cout << "Escolha o atributo (listado a cima): " << endl;
             cin >> attributeTemp;
             vezPlayer = false;
         }else {
@@ -100,11 +103,13 @@ void StartGame(ListCards &list){
         game.Turn();
         playerWins = game.GetPlayerWinsTurn();
         cout <<  "Ganhou: " << playerWins.GetNome() << endl;
+        cout << "============================" << endl;
     }
 }
 
 int main (void) {
     srand(time(NULL));
+    setlocale(LC_ALL, "");
 
     string namefile = "cards.csv";
     ifstream GameIn(namefile, ios::in);
@@ -133,7 +138,6 @@ int main (void) {
         positionList++;
     }
 
-    
     cout << "BEM VINDO AO SUPERTRUNFO !!" << endl;
     cout << "===========================" << endl;
     Game::GameRules();

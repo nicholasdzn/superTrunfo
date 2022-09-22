@@ -17,11 +17,12 @@ class Game {
     void PrintInfoCardOfPlayer(Cards card);
     public:
         Game(Player *player1, Player *player2);
+        ~Game();
         bool Turn();
         bool HasGame();
         void SetChoiceAttributes(AttributeCards attribute);
         Player GetPlayerWinsTurn();
-        void PrintInfoCards();
+        void PrintInfoCards(Player *player);
         bool HasSuperTrunfuInTurn();
         static void GameRules();
         void InitTurn();

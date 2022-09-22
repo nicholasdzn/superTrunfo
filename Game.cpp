@@ -7,6 +7,11 @@ Game::Game(Player *p1, Player *p2){
     player2 = p2;
 }
 
+Game::~Game() {
+    player1->Clear();
+    player2->Clear();
+}
+
 bool Game::Turn() {   
     if (!HasGame()) {
         return false;
@@ -41,17 +46,7 @@ Player* Game::NormalRule () {
 }
 
 Player* Game::SuperTrunfuRule () {
-    bool bothAreSuperTrunfu = currentCardPlayer1.IsSuperTrunfu() && currentCardPlayer2.IsSuperTrunfu();
-
-    if (bothAreSuperTrunfu) {
-        if (currentCardPlayer1.GroupSuperTrunfu() > currentCardPlayer2.GroupSuperTrunfu()) {
-            return player1;
-        }else {
-            return player2;
-        }
-    }
-
-    if (currentCardPlayer1.IsSuperTrunfu()) {
+    if (currentCardPlayer1.GroupSuperTrunfu() > currentCardPlayer2.GroupSuperTrunfu()) {
         return player1;
     }else {
         return player2;
@@ -75,29 +70,29 @@ bool Game::HasSuperTrunfuInTurn () {
     return currentCardPlayer1.IsSuperTrunfu() || currentCardPlayer2.IsSuperTrunfu();
 }
 
-void Game::PrintInfoCards () {
-    PrintInfoCardOfPlayer(player1->CurrentCard());
-    PrintInfoCardOfPlayer(player2->CurrentCard());
+void Game::PrintInfoCards (Player *player) {
+    PrintInfoCardOfPlayer(player->CurrentCard());
 }
 
 void Game::PrintInfoCardOfPlayer (Cards card) {
     std::cout << "===========================" << std::endl;
     std::cout << "model: " << card.model << std::endl;
-    std::cout << "weight: " << card.curbWeight << std::endl;
-    std::cout << "engine size: " << card.engineSize << std::endl;
-    std::cout << "horse power: " << card.horsePower << std::endl;
-    std::cout << "price: " << card.price << std::endl;
+    std::cout << "1 - weight: " << card.curbWeight << std::endl;
+    std::cout << "2 - engine size: " << card.engineSize << std::endl;
+    std::cout << "3 - horse power: " << card.horsePower << std::endl;
+    std::cout << "4 - price: " << card.price << std::endl;
     std::cout << "group: " << card.group << std::endl;
+    std::cout << "===========================" << std::endl;
 }
 
 void Game::GameRules(){
-    std::cout << "O jogo é todo baseado em comparar as cartas que você possui com as do seu adversário (no caso o computador)." << std::endl; 
-    std::cout << "Para que sua carta vença, o atributo (ou característica) escolhido precisa ter valor maior do que a carta do seu adversário." << std::endl;
-    std::cout << "Quando sua carta vence, você ganha a carta do seu adversário. Em seguida,coloca ambas no fim do seu deck" << std::endl;
-    std::cout << "============================================================================================================================" << std::endl;
-    std::cout << "1. Embaralham-se as 32 cartas e dividem-se em dois decks (um para cada jogador –P1 e P2)" << std::endl;
-    std::cout << "2. É retirada a carta do topo do deck de P1 e P2." << std::endl;
-    std::cout << "3. Escolhe-se o atributo que vai ser comparado e verifica-se quem venceu." << std::endl;
-    std::cout << "4. O vencedor recebe a carta do oponente e a coloca no final do seu deck, seguida da carta vencedora." << std::endl;
-    std::cout << "5. Repete-se os passos 2 a 4 até que um dos jogadores fique com o deck vazio." << std::endl;
+    std::wcout << L"O jogo é todo baseado em comparar as cartas que você possui com as do seu adversário (no caso o computador)." << std::endl; 
+    std::wcout << L"Para que sua carta vença, o atributo (ou característica) escolhido precisa ter valor maior do que a carta do seu adversário." << std::endl;
+    std::wcout << L"Quando sua carta vence, você ganha a carta do seu adversário. Em seguida,coloca ambas no fim do seu deck" << std::endl;
+    std::wcout << "============================================================================================================================" << std::endl;
+    std::wcout << L"1. Embaralham-se as 32 cartas e dividem-se em dois decks (um para cada jogador –P1 e P2)" << std::endl;
+    std::wcout << L"2. É retirada a carta do topo do deck de P1 e P2." << std::endl;
+    std::wcout << L"3. Escolhe-se o atributo que vai ser comparado e verifica-se quem venceu." << std::endl;
+    std::wcout << L"4. O vencedor recebe a carta do oponente e a coloca no final do seu deck, seguida da carta vencedora." << std::endl;
+    std::wcout << L"5. Repete-se os passos 2 a 4 até que um dos jogadores fique com o deck vazio." << std::endl;
 }
