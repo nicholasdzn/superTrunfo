@@ -79,7 +79,7 @@ void StartGame(ListCards &list){
         }else {
             cout << "Turno computador!" << endl;
         }
-
+        game.PrintPlacar();
         game.InitTurn();
         game.PrintInfoCards(&p1);
 

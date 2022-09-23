@@ -21,6 +21,7 @@ class Player {
         int GetValueAttributeOfCurrentCards(AttributeCards attribute);
         std::string GetNome();
         void Clear();
+        int SizeOfDeck();
 };
 
 #endif

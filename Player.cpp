@@ -43,3 +43,6 @@ std::string Player::GetNome () {
 void Player::Clear() {
     cards.Clear();
 }
+int Player::SizeOfDeck() {
+    return cards.Size();
+}

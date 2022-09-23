@@ -26,6 +26,7 @@ class Game {
         bool HasSuperTrunfuInTurn();
         static void GameRules();
         void InitTurn();
+        void PrintPlacar();
 };
 
 #endif

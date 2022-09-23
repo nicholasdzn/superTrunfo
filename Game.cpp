@@ -96,3 +96,8 @@ void Game::GameRules(){
     std::wcout << L"4. O vencedor recebe a carta do oponente e a coloca no final do seu deck, seguida da carta vencedora." << std::endl;
     std::wcout << L"5. Repete-se os passos 2 a 4 até que um dos jogadores fique com o deck vazio." << std::endl;
 }
+
+void Game::PrintPlacar() {
+    std::cout << "Quantidades de carta " << player1->GetNome() << " : " << player1->SizeOfDeck() << std::endl;
+    std::cout << "Quantidades de carta " << player2->GetNome() << " : " << player2->SizeOfDeck() << std::endl;
+}
